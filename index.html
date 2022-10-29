@@ -1,38 +1,30 @@
 <html>
     <head>
-        <script href="/app.js"></script>
-        <link rel="stylesheet" href="/css.css">
+        <link rel="stylesheet" href="/the Etch-a-Sketch project/css.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+        <script src="/the Etch-a-Sketch project/project_app.js"></script>
         <meta charset="utf-8" />
-        <title> Etch a  Sketch </title>
+        <title>Etch-a-Sketch</title>
     </head>
 
     <body>
-        <div id="header">
-            <h1 class="animate-charcter">Etch-a-Sketch</h1>
-           
-        <div id="form" class="form">
-            <p>New grid size:</p><input type="text" id="user-number" class="user-number">
-            <p id="copy-input"></p>
-            <button id='user-submit' class="user-submit">Submit</button>        
-          </div>
-          <p id="prompt"></p>
-    
-          <div id="buttons">
-          <form id=button-container>
-            <input type="radio" id="black-pen" name="pen" value="black-pen"> <label for="black-pen">Black</label>
-            <input type="radio" id="blue-pen" name="pen" value="blue-pen"> <label for="blue-pen">Blue</label>
-            <input type="radio" id="yellow-pen" name="pen" value="yellow-pen"> <label for="yellow-pen">Yellow</label>
-            <input type="radio" id="green-pen" name="pen" value="green-pen"> <label for="green-pen">Green</label>
-            <input type="radio" id="rainbow" name="pen" value="rainbow"> <label for="Rainbow">Rainbow</label>
-            <input type="radio" id="eraser" name="pen" value="eraser"> <label for="eraser">Eraser</label>
-          </form>
-          <button id="clear-button">Clear</button>
-          </div>
-              
-          <div class="canvas">
-            <div class="container">
-            </div>
-        </div>    
+      <h1>Etch  a Sketch</h1>
+        <div class="header">
+            <h6>Select the size</h6>
+            <button id="pop_up" type="button" class="btn btn-danger">Select</button>
+        </div>  
+        <p id="message"></p>
+        <p id="draw"></p>
 
+        <div class="board">
+
+        </div>
+
+
+        <div class="footer">
+            <button type="button" class="btn btn-dark" onclick="setcolor('Black')">Black</button>
+            <button type="button" class="btn btn-info" onclick="setcolor('Random')">Random</button>
+            <button type="button" class="btn btn-warning"  onclick="resetboard()">Reset</button>
+        </div>
     </body>
 </html>

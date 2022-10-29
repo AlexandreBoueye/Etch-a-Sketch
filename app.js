@@ -1,100 +1,85 @@
-let containerDiv = document.querySelector('.container');
-let userValue = document.getElementById('user-number');
-let userSubmit = document.getElementById('user-submit');
-let promptText = document.getElementById('prompt');
-let copyInput = document.getElementById('copy-input');
-let clearButton = document.getElementById('clear-button');
+let color  = black ;
+let click = false;
 
-userValue.addEventListener('focus', entryHint);
-userValue.addEventListener('keyup', duplicateGrid);
-userSubmit.addEventListener('click', makeGrid);
-clearButton.addEventListener('click', clearGrid);
+document.addEventListener("DOMContentLoaded", function (){
+   
+    creatboard(24)
 
-makeGrid();
-draw();
-
-function duplicateGrid() {
-    let userGrid = userValue.value;
-    copyInput.textContent = "x " + userGrid;
-}
-
-function entryHint() {
-    promptText.textContent = "Enter a number between 2 and 99."; 
-}
-
-function makeGrid() {
-    let number = userValue.value;
-    if(number < 0 || number > 100 || isNaN(number)) {
-        promptText.textContent = "Make sure it's a number from 2 to 99!";
-    } else {
-    promptText.textContent = "";
-    copyInput.textContent = "";
-    userValue.value = "";
-    containerDiv.innerHTML = "";
-    if (number == 0 || number > 100 || number == "") {
-        for(let i = 0; i < 10; i++) {
-            let row = document.createElement('div');
-            row.classList.add('row');
-            containerDiv.appendChild(row);
-            for(let k = 0; k < 10; k++) {
-                let column = document.createElement('div');
-                column.classList.add('column')
-                row.appendChild(column);
+    document.querySelector("body").addEventListener("click",fonction(e){
+        if(e.target.tagname !="BUTTON"){
+            click=!click;
+            let draw  =  document.querySelector("#draw");
+            if(click){
+                draw.innerHTML="Now You can Draw";
             }
-            } 
-        }   else {
-        for(let i = 0; i < number; i++) {
-            let row = document.createElement('div');
-            row.classList.add('row');
-            containerDiv.appendChild(row);
-            for(let k = 0; k < number; k++) {
-                let column = document.createElement('div');
-                column.classList.add('column')
-                row.appendChild(column);
+            else {
+                draw.innerHTML="You are now allowed to draw"
+            }
         }
-    }
-}
-}
+    })
 
-draw();
-}
-
-
-function draw() {
-    let columns = document.getElementsByClassName("column");
-    for (let i = 0; i < columns.length; i++) {
-        columns[i].addEventListener("mouseover", changeColor);
-        }
-
-function changeColor() {
-    let blackRadio = document.getElementById('black-pen');
-    let redRadio = document.getElementById('red-pen');
-    let blueRadio = document.getElementById('blue-pen');
-    let greenRadio=document.getElementById('green-pen')
-    let rainbow = document.getElementById('rainbow');
-    let eraserRadio = document.getElementById('eraser'); 
+    let btn_pop_up = document.querySelector("#pop_up")
+    btn_pop_up.addEventListener ("click", function() {
+        let size=getsize();
+        creatboard(size);
+    })
     
-    if (blackRadio.checked) {
-        this.style.backgroundColor = '#2e2b2b';
-    } else if (redRadio.checked) {
-        this.style.backgroundColor = '#da2d2d'
-    } else if (blueRadio.checked) {
-        this.style.backgroundColor = "#3f33dd"
-    }else if (greenRadio.checked) {
-        this.style.backgroundColor = "#00FF00"
-    } else if (eraserRadio.checked) {
-        this.style.backgroundColor = ''
-    } else if (rainbow.checked) {
-        let randomColor = Math.floor(Math.random()*16777215).toString(16);
-        this.style.backgroundColor = "#" + randomColor;
+})
+
+function creatboard (size){
+    let board = document.querySelector(".board");
+  
+    board.style.GridTemplateColumns = `(repeat(${size}, 1fr)`;
+    board.style.GridTemplateRows = `(repeat(${size}, 1fr)`;
+
+    let numdivs = size*size;
+
+    for (i=0;i<numdivs;i++){
+        let div = document.createElement('div');
+        div.addEventListener("mouseover", colordiv) 
+            
+        }
+        board.insertAdjacentElement('beforeend', div);
     }
 }
+
+function getsize() {
+    let  input = prompt("What do you want for the size of the board ?");
+    let message = document.querySelector("message");
+    if (input == ""){
+        message.innerHTML = "Please provide a number." ;
+
+    }
+    else if (input<0 || input> 100) {
+        message.innerHTML = "Please provide a number between 1 and 100." ;
+
+    }
+    else {
+        message.innerHTML = "Congratulations, now you can play!" ;
+        return input;
+    };
 }
 
+function colordiv() {
+    if (click){
 
-function clearGrid() {
-    let columns = document.getElementsByClassName("column");
-    for (let i = 0; i < columns.length; i++) {
-        columns[i].style.backgroundColor = '';
+    
+    if (color == "random") {
+        this.style.backgroundcolor = `hsl(${Math.randomq()*360},100% , 50%)`
     }
+    else {
+        this.style.backgroundcolor = 'black'
     }
+}
+
+}
+
+function setcolor (colorchoice){
+     color = colorchoice;
+
+}
+
+function resetboard () {
+    let divs=document.querySelectorAll("div")
+    divs.forEach((div)=> div.style.backgroundColor = 'white')
+}
